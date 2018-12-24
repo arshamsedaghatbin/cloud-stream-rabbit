@@ -1,0 +1,39 @@
+server:
+    port: 8082
+spring:
+  cloud:
+    stream:
+      #          kafka:
+      #            binder:
+      #              brokers: ${KAFKA_HOST}:${KAFKA_PORT}
+      #              zkNodes: ${KAFKA_HOST}:2181
+      #          bindings:
+      #            input-transfer:
+      #              destination: ${BAMBO_TRANSFER_CHANNEL}
+      #              contentType: application/json
+      #            output-transfer:
+      #              destination: ${BAMBO_TRANSFER_CHANNEL}
+      #              contentType: application/json
+
+      bindings:
+        input-transfer:
+          #            consumer:
+          #              acknowledge-mode: MANUAL
+          destination: nima
+          contentType: application/json
+          binder: rabbit_configuration
+        output-transfer:
+          destination: nima
+          contentType: application/json
+          binder: rabbit_configuration
+
+      binders:
+        rabbit_configuration:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: localhost
+                port: 5672
+                username: guest
+                password: guest
